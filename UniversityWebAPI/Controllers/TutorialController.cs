@@ -23,9 +23,9 @@ namespace UniversityWebAPI.Controllers
 
         // GET api/<Tutorial7Controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Tutorial Get(int id)
         {
-            return "value";
+            return tutorials.Find(x => x.Id == id);
         }
 
         // POST api/<Tutorial7Controller>
