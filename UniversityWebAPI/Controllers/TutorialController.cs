@@ -23,27 +23,37 @@ namespace UniversityWebAPI.Controllers
 
         // GET api/<Tutorial7Controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Tutorial Get(int id)
         {
-            return "value";
+            return tutorials.Find(x => x.Id == id);
         }
 
         // POST api/<Tutorial7Controller>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public List<Tutorial> Post([FromBody] Tutorial value)
         {
+            tutorials.Add(value);
+            return tutorials;
         }
 
         // PUT api/<Tutorial7Controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public List<Tutorial> Put(int id, [FromBody] Tutorial value)
         {
+            var tutorialFound = tutorials.Find(x => x.Id == id);
+            tutorialFound.Title = value.Title;
+            tutorialFound.Year = value.Year;
+            tutorialFound.Description = value.Description;
+            return tutorials;
         }
 
         // DELETE api/<Tutorial7Controller>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var tutorialFound = tutorials.Find(x => x.Id == id);
+            tutorials.Remove(tutorialFound);
+            return;
         }
     }
 }
